@@ -17,7 +17,7 @@ class TasklistsController extends Controller
      */
     public function index()
     {
-         $tasklist = Tasklist::all();
+         $tasklists = Tasklist::all();
 
         return view('tasklists.index', [
             'tasklists' => $tasklists,
@@ -46,6 +46,9 @@ class TasklistsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'content' => 'required|max:191',
+        ]);
         $tasklist = new Tasklist;
         $tasklist->content = $request->content;
         $tasklist->save();
@@ -76,6 +79,10 @@ class TasklistsController extends Controller
      */
     public function edit($id)
     {
+        $this->validate($request, [
+            'content' => 'required|max:191',
+        ]);
+
         $tasklist = Tasklist::find($id);
 
         return view('tasklists.edit', [
