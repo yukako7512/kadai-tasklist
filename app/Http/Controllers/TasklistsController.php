@@ -100,13 +100,14 @@ class TasklistsController extends Controller
     public function update(Request $request, $id)
     {
           $this->validate($request, [
-              'status' => 'required|max:10', 
+             
             'content' => 'required|max:10',
+            'status' => 'required|max:10',
         ]);
 
         $tasklist = Tasklist::find($id);
-        $tasklist->title = $request->title;
         $tasklist->content = $request->content;
+        $tasklist->status = $request->status;
         $tasklist->save();
 
         return redirect('/');
@@ -120,7 +121,7 @@ class TasklistsController extends Controller
      */
     public function destroy($id)
     {
-         $tasklist = Tasklist::find($id);
+        $tasklist = Tasklist::find($id);
         $tasklist->delete();
 
         return redirect('/');
