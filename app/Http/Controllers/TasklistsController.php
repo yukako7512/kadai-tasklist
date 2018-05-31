@@ -47,12 +47,13 @@ class TasklistsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'status' => 'required|max:10',
-            'content' => 'required|max:10',
+
+        'content' => 'required|max:10',
+         'status' => 'required|max:10',
         ]);
         $tasklist = new Tasklist;
-        $tasklist->status = $request->status;   
         $tasklist->content = $request->content;
+        $tasklist->status = $request->status;
         $tasklist->save();
 
         return redirect('/');
