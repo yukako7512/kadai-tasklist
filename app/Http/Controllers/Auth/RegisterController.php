@@ -45,9 +45,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $tasklist)
     {
-        return Validator::make($data, [
+        return Validator::make($tasklist, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -60,12 +60,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(array $tasklist)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'name' => $tasklist['name'],
+            'email' => $tasklist['email'],
+            'password' => bcrypt($tasklist['password']),
         ]);
     }
 }
